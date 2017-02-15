@@ -1,5 +1,14 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<h1>Default Blank Page~</h1>
-<p>Get to adding stuff</p>
+<link rel="stylesheet" href="~/css/style.css"/>
+<div id="display">
+ <h3 class="center-text">The Cookie (Cookie #@ViewBag.RunNumber)</h3>
+ <a href="/"><button>Cookie</button></a> 
+ <a href="clear"><button>Clear Cookie</button></a>
+</div><!--close display-->
+
+<div id="display">
+     <div class="Tool">
+     </div><!--Tool-->
+</div><!--close display-->
