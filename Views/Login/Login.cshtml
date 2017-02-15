@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Login";
+}
+<h1>Login to Clicker Coder</h1>
+<form action="Login" method="post">
+    <input type="text" value="" id="frmUserName" name="frmUserName" />
+    <br>
+    <input type="password" value="******" id="frmPassword" name="frmPassword" />
+    <br>
+    <br>
+    <input type="submit" value="Login" class="font-color:blue;">
+</form>
+
+<p>@ViewBag.VerifiedUser</p>

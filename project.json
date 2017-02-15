@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "MySqlConnector":"0.1.0-alpha12",
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
       "type": "platform"
