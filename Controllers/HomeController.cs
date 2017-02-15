@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace clickerCoder.Controllers
 {
     public class HomeController : Controller
+
     {
 
         [HttpGet]
