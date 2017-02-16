@@ -12,25 +12,18 @@
          //  Run Game Loop!
          //check user data
          $("#thing").click(function() {
-             $.get("click", function(res) {
-                 alert(res.data)
-             })
+             $.get("click", function(res) {})
          });
          $("#item").click(function() {
-             alert("clicked");
              $.post("item", { itemID: 1, itemCost: 200 }, function(res) {
                  // TODO get actual variables
-                 if (res.playergold < 200) {
-                     alert("You can't afford that.")
-                 } else {
-                     alert("else")
+                 if (res.playergold < 200) {} else {
                      $.post("addItem", function(res) {})
                      newItem = res.item;
                  }
              })
          });
          $.post("#automatic", { userID: 1 }, function(res) {
-             alert("Automatic")
              clickCount += res.clicks;
          });
          redraw(4);
