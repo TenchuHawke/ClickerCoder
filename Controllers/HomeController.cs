@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace clickerCoder.Controllers
@@ -9,24 +10,27 @@ namespace clickerCoder.Controllers
     {        // GET: /Home/
         [HttpGet]
         [Route("")]
-        public IActionResult Index()
+        public IActionResult index()
         {
-            //LogedInUser("admin");
+            int? Number = HttpContext.Session.GetInt32("Number");
+            if (Number == null)
+            {
+                Number = 0;
+            }
+            Number += 1;
+
+            ViewBag.RunNumber = Number;
+            HttpContext.Session.SetInt32("Number", (int)Number);
             return View();
         }
 
 
-        public bool LogedInUser(string CurrentUser)
+        [HttpGet]
+        [Route("clear")]
+        public IActionResult clear()
         {
-            
-                string selectQry = @"select * from Users where username = '{CurrentUser}'" ;
-                foreach(var usr in DbConnector.ExecuteQuery(selectQry))
-                {
-                    ViewBag.UserName = usr["UserName"];
-                }
-                 
-              return true;  
-           
+            HttpContext.Session.Clear();
+            return RedirectToAction("index");
         }
 
         // Items //
@@ -35,5 +39,19 @@ namespace clickerCoder.Controllers
             //table in database is Items
             return true;
         }
+
+    
+    public bool LogedInUser(string CurrentUser)
+    {
+
+        string selectQry = @"select * from Users where username = '{CurrentUser}'";
+        foreach (var usr in DbConnector.ExecuteQuery(selectQry))
+        {
+            ViewBag.UserName = usr["UserName"];
+        }
+
+        return true;
+
     }
+  }
 }
