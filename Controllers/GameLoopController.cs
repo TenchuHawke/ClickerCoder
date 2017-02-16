@@ -6,36 +6,77 @@ using Microsoft.AspNetCore.Http;
 
 namespace clickerCoder.Controllers
 {
+
     public class GameController : Controller
     {
         [HttpGet]
         [Route("game")]
         public IActionResult Game()
         {
-            // delay rate in MS
-            int FPS = 60;
-            bool GameOn = true;
-            HttpContext.Session.SetInt32("loops2", 0);
-            HttpContext.Session.SetInt32("total", 0);
-            while (GameOn == true)
-            {
-                int time1 = Environment.TickCount;
-                // check for user input.
-                int input = GetUserInput.readClick();
-                // update game variables based upon changes.
-                UpdateGameState.click();
-                UpdateGameState.automatic();
-                // If anything has changed, draw the screen
-                if (RenderGame.check())
-                {
-                    RenderGame.draw();
-                }
-                // delay until FPS ms have passed. 
-                CheckDelay.wait(FPS, time1);
-            }
-            return View("Index");
+            return View("Game");
+        }
+
+        [HttpGet]
+        [Route("click")]
+
+        public JsonResult clicked()
+        {
+            System.Console.WriteLine("CLICKED");
+            return Json(new { data = "hi", info = "stuff" });
+        }
+        [HttpPostAttribute]
+        [Route("item")]
+
+        public JsonResult item(int itemId, int itemCost)
+        {
+            System.Console.WriteLine("Item:" + itemId.ToString() + "  cost:"
+            + itemCost.ToString());
+            return Json(new { playergold = 500, item = "Axe" });
+        }
+        [HttpPostAttribute]
+        [Route("addItem")]
+        public JsonResult addItem()
+        {
+            System.Console.WriteLine("Bobo: cost:");
+            return Json(new { playergold = 500, item = "Axe" });
+        }
+        [HttpPostAttribute]
+        [Route("Automatic")]
+        public JsonResult automatic(int userId)
+        {
+            System.Console.WriteLine("Auto:" + userId.ToString());
+            return Json(new { clicks = 1000 });
         }
     }
+
+    public static class gameloop2
+    {
+        public static void clicked()
+        {
+            System.Console.WriteLine("CLICKED");
+            return;
+        }
+    }
+    public static class GameLoop
+    {
+        public static void run(int click, int time)
+        {
+            int time1 = Environment.TickCount;
+            // check for user input.
+            int input = GetUserInput.readClick();
+            // update game variables based upon changes.
+            UpdateGameState.click(input);
+            UpdateGameState.automatic();
+            // If anything has changed, draw the screen
+            if (RenderGame.check())
+            {
+                RenderGame.draw();
+            }
+            // delay until FPS ms have passed. 
+            // CheckDelay.wait(FPS, time1);
+        }
+    }
+
     public static class GetUserInput
     {
         public static int readClick()
@@ -47,11 +88,12 @@ namespace clickerCoder.Controllers
     }
     public static class UpdateGameState
     {
-        public static void click()
+        public static void click(int input)
         {
-            
+
         }
-        public static void automatic(){
+        public static void automatic()
+        {
 
         }
     }
@@ -61,6 +103,7 @@ namespace clickerCoder.Controllers
         {
             if (false)
             {
+
                 return false;
             }
             else
