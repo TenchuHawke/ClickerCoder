@@ -1,14 +1,51 @@
 @{
     ViewData["Title"] = "Login";
 }
+<script>
+    function ShowRegister() {
+        document.getElementById('FormRegister').style.display = "block";
+        document.getElementById('LoginForm').style.display = "none";
+        document.getElementById('registerbtn').style.display = "none";
+}
+    function ShowLogin(){
+        document.getElementById('FormRegister').style.display = "none";
+        document.getElementById('LoginForm').style.display = "block";
+        document.getElementById('registerbtn').style.display = "block";
+    }
+</script>
 <h1>Login to Clicker Coder</h1>
-<form action="Login" method="post">
-    <input type="text" value="" id="frmUserName" name="frmUserName" />
-    <br>
-    <input type="password" value="******" id="frmPassword" name="frmPassword" />
-    <br>
-    <br>
-    <input type="submit" value="Login" class="font-color:blue;">
-</form>
+<div id="LoginForm" style="display: block">
+    <form action="Login" method="post">
+        UserName: <input type="text" value="" id="frmUserName" name="frmUserName" />
+        <br>
+        Password: <input type="password" value="" id="frmPassword" name="frmPassword" />
+        <input type="hidden" id="UserType" name="UserType" value="loginuser">
+        <br>
+        <br>
+        <input type="submit" value="Login" class="font-color:blue;">
+    </form>
+</div>
+<div id="registerbtn">
+    <input type="button" name="register" value="Register New User?" onclick="ShowRegister()" />
+</div>
 
-<p>@ViewBag.VerifiedUser</p>
+<div id="FormRegister"  style="display:none;" class="answer_list" > 
+    Register
+    <p>
+        <form action="Login" method="post" id="RegisterNew" name="RegisterNew">
+            New User Name:<input type="text" value="" id="frmUserName" name="frmUserName" />
+            <br>
+            Password: <input type="password" value="" id="frmPassword1" name="frmPassword1" />
+            Re-type Password: <input type="password" value="" id="frmPassword" name="frmPassword" />
+            <br>
+            <br>
+            <input type="hidden" id="UserType" name="UserType" value="NewUser">
+            <input type="submit" value="Register" class="font-color:blue;">
+            <input type="button" name="Cancel" value="Cancel" onclick="ShowLogin()" />
+        </form>
+    </p>
+</div>
+<div>
+    @ViewBag.Info
+</div>
+

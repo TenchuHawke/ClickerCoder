@@ -28,5 +28,12 @@ namespace clickerCoder.Controllers
               return true;  
            
         }
+
+        // Items //
+        public static bool AddItems(string itemName)
+        {
+            //table in database is Items
+            return true;
+        }
     }
 }

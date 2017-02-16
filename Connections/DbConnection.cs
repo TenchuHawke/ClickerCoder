@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using MySql.Data.MySqlClient;
+
 namespace clickerCoder.Controllers
 {
     public class DbConnector
@@ -35,4 +36,6 @@ namespace clickerCoder.Controllers
             }
         }
     }
+
+    
 }
